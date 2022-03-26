@@ -10,5 +10,20 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>Project-core</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>11</version>
+        </dependency>
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.36.0.3</version>
+            <scope>runtime</scope>
+        </dependency>
+
+    </dependencies>
+
 
 </project>
