@@ -1,5 +1,7 @@
 package hu.unideb.inf;
 
+import hu.unideb.dao.TAJDAOImplement;
+import hu.unideb.dao.TajDAO;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -14,11 +16,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        var javaVersion = SystemInfo.javaVersion();
-        var javafxVersion = SystemInfo.javafxVersion();
 
-        var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        var scene = new Scene(new StackPane(label), 640, 480);
+        TajDAO dao = new TAJDAOImplement();
+        dao.findAll().forEach(System.out::println);
+
+        var scene = new Scene(new StackPane(new Label("teszt")), 640, 480);
         stage.setScene(scene);
         stage.show();
     }
