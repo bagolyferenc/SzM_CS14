@@ -16,7 +16,7 @@ import java.util.Properties;
 
     public TAJDAOImplement(){
         try {
-            properties.load(getClass().getResourceAsStream("/appication.properties"));
+            properties.load(getClass().getResourceAsStream("/application.properties"));
             connectionURL = properties.getProperty("db.url");
         }catch (IOException e)
         {
