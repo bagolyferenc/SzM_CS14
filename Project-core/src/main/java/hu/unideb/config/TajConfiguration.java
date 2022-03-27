@@ -5,7 +5,7 @@ import java.util.Properties;
 
 public class TajConfiguration {
 
-    private static Properties properties = new Properties();    //Maybe final
+    private static Properties properties = new Properties();
 
 
 

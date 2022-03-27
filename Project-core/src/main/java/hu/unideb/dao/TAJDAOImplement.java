@@ -1,5 +1,8 @@
 package hu.unideb.dao;
 
+import hu.unideb.config.TajConfiguration;
+import hu.unideb.inf.TAJ;
+
 import javax.print.attribute.standard.MediaSize;
 import java.io.IOException;
 import java.sql.*;
@@ -10,18 +13,15 @@ import java.util.Properties;
 
  public class TAJDAOImplement implements TajDAO {
 
-    private static final String SELECT_ALL_TAJ = "SELECT * FROM TAJ";
-    public Properties properties = new Properties();
-    private String connectionURL;
+     private static final String SELECT_ALL_TAJ = "SELECT * FROM TAJ";
+     private static final String INSERT_TAJ = "INSERT INTO TAJ(tajszam, name, vercsoport, lakcim, szhely, anev, sznap) VALUES(?,?,?,?,?,?,?) ";
+     private static final String UPDATE_TAJ = "UPDATE TAJ SET tajszam=?, name=?, vercsoport=?, lakcim=?, szhely=?, anev=?, sznap=? WHERE id=?";
+     private static final String DELETE_TAJ = "DELETE FROM TAJ WHERE id=?";
+     public Properties properties = new Properties();
+     private String connectionURL;
 
     public TAJDAOImplement(){
-        try {
-            properties.load(getClass().getResourceAsStream("/application.properties"));
-            connectionURL = properties.getProperty("db.url");
-        }catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+        connectionURL = TajConfiguration.getValues("db.url");
     }
 
 
@@ -64,11 +64,55 @@ import java.util.Properties;
 
     @Override
     public hu.unideb.inf.TAJ save(hu.unideb.inf.TAJ taj) {
-        return null;
+        try(Connection c = DriverManager.getConnection(properties.getProperty(connectionURL));
+            PreparedStatement stmt = taj.getId() <= 0 ? c.prepareStatement(INSERT_TAJ, Statement.RETURN_GENERATED_KEYS) : c.prepareStatement(UPDATE_TAJ);
+        ){
+
+            if(taj.getId() < 0) { //UPDATE
+                stmt.setInt(7, taj.getId());
+            }
+            //tajszam=?, name=?, vercsoport=?, lakcim=?, szhely=?, anev=?, sznap=? WHERE id=?
+
+            stmt.setString(1, taj.getTajszam());
+            stmt.setString(2, taj.getName());
+            stmt.setString(3, taj.getVercsoport());
+            stmt.setString(4, taj.getLakcim());
+            stmt.setString(5, taj.getSzhely());
+            stmt.setString(6, taj.getAnev());
+            stmt.setString(7, taj.getSznap().toString());
+
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows == 0) {
+                return null;
+            }
+
+            if(taj.getId() <= 0){ //INSERT
+                ResultSet genKeys = stmt.getGeneratedKeys();
+                if (genKeys.next()){
+                    taj.setId(genKeys.getInt(1));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return taj;
     }
 
     @Override
     public void delete(hu.unideb.inf.TAJ taj) {
+
+        try (Connection c = DriverManager.getConnection(connectionURL);
+            PreparedStatement stmt = c.prepareStatement(DELETE_TAJ);
+        ){
+
+            stmt.setInt(1,taj.getId());
+            stmt.executeUpdate();
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
 
     }
 }
