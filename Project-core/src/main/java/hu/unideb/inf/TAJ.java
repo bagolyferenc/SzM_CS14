@@ -1,7 +1,6 @@
 package hu.unideb.inf;
 
 import javafx.beans.property.*;
-import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
 
@@ -15,20 +14,6 @@ public class TAJ {
     private StringProperty szhely = new SimpleStringProperty(this, "szhely");
     private StringProperty anev = new SimpleStringProperty(this, "anev");
     private ObjectProperty<LocalDate> sznap = new SimpleObjectProperty<>(this, "sznap");
-    private ObjectProperty<ObservableList<Oltas>> oltasok = new SimpleObjectProperty<>(this, "oltasok");
-
-
-    public ObservableList<Oltas> getOltasok() {
-        return oltasok.get();
-    }
-
-    public ObjectProperty<ObservableList<Oltas>> oltasokProperty() {
-        return oltasok;
-    }
-
-    public void setOltasok(ObservableList<Oltas> oltasok) {
-        this.oltasok.set(oltasok);
-    }
 
     /*public enum GenderType{
         MALE,FEMALE,NA
