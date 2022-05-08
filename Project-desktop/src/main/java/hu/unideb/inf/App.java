@@ -36,6 +36,7 @@ public class App extends Application {
         try {
            Parent root = Loader.load();
            scene = new Scene(root);
+           scene.getStylesheets().add("/css/style.css");
 
         } catch (IOException e) {
             e.printStackTrace();
