@@ -67,8 +67,7 @@ import java.util.Properties;
         try(Connection c = DriverManager.getConnection(properties.getProperty(connectionURL));
             PreparedStatement stmt = taj.getId() <= 0 ? c.prepareStatement(INSERT_TAJ, Statement.RETURN_GENERATED_KEYS) : c.prepareStatement(UPDATE_TAJ);
         ){
-
-            if(taj.getId() < 0) { //UPDATE
+            if(taj.getId() > 0) { //UPDATE
                 stmt.setInt(7, taj.getId());
             }
             //tajszam=?, name=?, vercsoport=?, lakcim=?, szhely=?, anev=?, sznap=? WHERE id=?
@@ -101,7 +100,7 @@ import java.util.Properties;
     }
 
     @Override
-    public void delete(hu.unideb.inf.TAJ taj) {
+    public void delete(TAJ taj) {
 
         try (Connection c = DriverManager.getConnection(connectionURL);
             PreparedStatement stmt = c.prepareStatement(DELETE_TAJ);

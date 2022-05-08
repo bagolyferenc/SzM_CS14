@@ -73,9 +73,9 @@ public class MainWindowController implements Initializable {
             }
 
             @Override
-            protected void updateItem(Void s, boolean b) {
-                super.updateItem(s, b);
-                if(b){
+            protected void updateItem(Void elem, boolean ures) {
+                super.updateItem(elem, ures);
+                if(ures){
                     setGraphic(null);
                 }
                 else{
@@ -92,7 +92,7 @@ public class MainWindowController implements Initializable {
         final ButtonType igenBtn = new ButtonType("Igen");
         final ButtonType nemBtn = new ButtonType("Nem");
 
-        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Biztosan törölni szeretné ezt a személyt: "+  c.getName() + " az adatbázisból?", igenBtn, nemBtn);
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Biztosan törölni szeretné "+  c.getName() + "-t a adatbázisból?", igenBtn, nemBtn);
         confirm.showAndWait().ifPresent(buttonType -> {
             if (buttonType.equals(igenBtn)) {
                 dao.delete(c);
