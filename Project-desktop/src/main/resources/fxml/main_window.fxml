@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.controller.MainWindowController">
-    <children>
-        <MenuBar prefHeight="28.0" prefWidth="600.0">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.controller.MainWindowController">
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
@@ -23,7 +22,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <MenuItem mnemonicParsing="false" text="Személy hozzáadás" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
@@ -33,37 +32,37 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <HBox alignment="CENTER" layoutX="-1.0" layoutY="28.0" prefHeight="50.0" prefWidth="300.0" AnchorPane.leftAnchor="-1.0">
+    </top>
+    <center>
+        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <children>
-                <Label prefHeight="28.0" prefWidth="130.0" text="TAJ SZÁM:" textFill="#0755ff">
+                <Label text="Hatósági adatok">
                     <font>
-                        <Font name="Times New Roman Bold Italic" size="24.0" />
+                        <Font size="24.0" />
                     </font>
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </VBox.margin>
                 </Label>
-                <TextField prefHeight="26.0" prefWidth="150.0" />
+                <TableView fx:id="tajTable" prefHeight="349.0" prefWidth="475.0">
+                    <columns>
+                        <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Név" />
+                        <TableColumn fx:id="tajColumn" prefWidth="75.0" text="TAJ" />
+                        <TableColumn fx:id="vercsoportColumn" prefWidth="75.0" text="Vércsoport" />
+                        <TableColumn fx:id="lakcimColumn" prefWidth="75.0" text="Lakcím" />
+                        <TableColumn fx:id="szulhelyColumn" prefWidth="75.0" text="Szül.hely" />
+                        <TableColumn fx:id="szulnapColumn" prefWidth="75.0" text="Szül.nap" />
+                        <TableColumn fx:id="anyjaneveColumn" prefWidth="75.0" text="Anyja neve" />
+                        <TableColumn fx:id="opciokColumn" prefWidth="75.0" text="Opciók" />
+                    </columns>
+                    <VBox.margin>
+                        <Insets bottom="10.0" right="10.0" />
+                    </VBox.margin>
+                </TableView>
             </children>
-        </HBox>
-        <HBox alignment="CENTER" layoutY="100.0" prefHeight="28.0" prefWidth="600.0">
-            <children>
-                <Label text="Hatósági adatok" textFill="#791818">
-                    <font>
-                        <Font name="Times New Roman Bold Italic" size="24.0" />
-                    </font>
-                </Label>
-            </children>
-        </HBox>
-        <TableView fx:id="tajTable" layoutY="128.0" prefHeight="272.0" prefWidth="600.0">
-            <columns>
-                <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Név" />
-                <TableColumn fx:id="tajColumn" prefWidth="75.0" text="TAJ" />
-                <TableColumn fx:id="vercsoportColumn" prefWidth="75.0" text="Vércsoport" />
-                <TableColumn fx:id="lakcimColumn" prefWidth="75.0" text="Lakcím" />
-                <TableColumn fx:id="szulhelyColumn" prefWidth="75.0" text="Szül.hely" />
-                <TableColumn fx:id="szulnapColumn" prefWidth="75.0" text="Szül.nap" />
-                <TableColumn fx:id="anyjaneveColumn" prefWidth="75.0" text="Anyja neve" />
-                <TableColumn prefWidth="39.2000732421875" text="Nem" />
-                <TableColumn fx:id="opciokColumn" prefWidth="75.0" text="Opciók" />
-            </columns>
-        </TableView>
-    </children>
-</AnchorPane>
+        </VBox>
+    </center>
+    <left>
+        <VBox prefHeight="375.0" prefWidth="125.0" BorderPane.alignment="CENTER" />
+    </left>
+</BorderPane>

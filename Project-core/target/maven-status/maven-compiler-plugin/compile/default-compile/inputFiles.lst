@@ -1,4 +1,7 @@
-D:\SzMProject8\Project-core\src\main\java\hu\unideb\config\TajConfiguration.java
-D:\SzMProject8\Project-core\src\main\java\hu\unideb\inf\TAJ.java
-D:\SzMProject8\Project-core\src\main\java\hu\unideb\dao\TAJDAOImplement.java
-D:\SzMProject8\Project-core\src\main\java\hu\unideb\dao\TajDAO.java
+D:\SzMProject\Project-core\src\main\java\hu\unideb\config\TajConfiguration.java
+D:\SzMProject\Project-core\src\main\java\hu\unideb\dao\OltasDAOImplement.java
+D:\SzMProject\Project-core\src\main\java\hu\unideb\inf\TAJ.java
+D:\SzMProject\Project-core\src\main\java\hu\unideb\dao\TAJDAOImplement.java
+D:\SzMProject\Project-core\src\main\java\hu\unideb\dao\OltasDAO.java
+D:\SzMProject\Project-core\src\main\java\hu\unideb\inf\Oltas.java
+D:\SzMProject\Project-core\src\main\java\hu\unideb\dao\TajDAO.java
