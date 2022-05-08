@@ -92,7 +92,7 @@ public class MainWindowController implements Initializable {
         final ButtonType igenBtn = new ButtonType("Igen");
         final ButtonType nemBtn = new ButtonType("Nem");
 
-        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Biztosan törölni szeretné ezt a személyt: "+  c.getName() + " az adatbázisból?", igenBtn, nemBtn);
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Biztosan törölni szeretné "+  c.getName() + " az adatbázisból?", igenBtn, nemBtn);
         confirm.showAndWait().ifPresent(buttonType -> {
             if (buttonType.equals(igenBtn)) {
                 dao.delete(c);
