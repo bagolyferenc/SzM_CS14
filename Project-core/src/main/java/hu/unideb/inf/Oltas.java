@@ -5,17 +5,6 @@ import javafx.beans.property.*;
 import java.time.LocalDate;
 
 public class Oltas {
-    private final StringProperty value = new SimpleStringProperty(this,"value");
-
-    public String getValue(){
-        return value.get();
-    }
-
-    public StringProperty valueProperty(){
-        return value;
-    }
-
-
     private IntegerProperty id = new SimpleIntegerProperty("this", "id");
     private StringProperty oltas_neve = new SimpleStringProperty("this", "oltas_neve");
     private StringProperty orvos_neve = new SimpleStringProperty("this", "orvos_neve");
@@ -68,10 +57,5 @@ public class Oltas {
 
     public void setOltas_idopontja(LocalDate oltas_idopontja) {
         this.oltas_idopontja.set(oltas_idopontja);
-    }
-
-    @Override
-    public String toString() {
-        return oltas_neve.getValue() + ", " + orvos_neve.getValue() + ", " + oltas_idopontja.getValue();
     }
 }

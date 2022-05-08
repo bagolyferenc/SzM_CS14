@@ -7,15 +7,13 @@ import hu.unideb.inf.TAJ;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class OltasDAOImplement implements OltasDAO{
 
     private static final String SELECT_OLTAS_BY_TAJ_ID = "SELECT * FROM OLTAS WHERE taj_id=?";
-    private static final String INSERT_OLTAS = "INSERT INTO OLTAS(oltas_neve, orvos_neve, oltas_idopontja, taj_id) VALUES (?,?,?,?)";
-    private static final String UPDATE_OLTAS = "UPDATE OLTAS SET oltas_neve = ?, orvos_neve = ?, oltas_idopontja = ? WHERE id = ?";
+    private static final String INSERT_OLTAS = "INSERT INTO OLTAS(oltas_neve, orvos_neve, oltas_idopontja) VALUES (?,?,?)";
+    private static final String UPDATE_OLTAS = "UPDATE OLTAS SET oltas_neve = ?, orvos_neve = ?, oltas_idopontja = ?, WHERE id = ?";
     private static final String DELETE_OLTAS = "DELETE FROM OLTAS WHERE id = ?";
     private String connectionURL;
 
@@ -104,10 +102,5 @@ public class OltasDAOImplement implements OltasDAO{
         }catch (SQLException e){
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void deleteAll(int tajid) {
-        findAll(tajid).forEach(this::delete);
     }
 }
