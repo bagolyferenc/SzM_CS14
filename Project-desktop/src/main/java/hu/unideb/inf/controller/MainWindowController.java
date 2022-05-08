@@ -2,9 +2,11 @@ package hu.unideb.inf.controller;
 
 import hu.unideb.dao.TAJDAOImplement;
 import hu.unideb.dao.TajDAO;
+import hu.unideb.inf.App;
 import hu.unideb.inf.TAJ;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -66,16 +68,15 @@ public class MainWindowController implements Initializable {
 
                 editBtn.setOnAction(actionEvent -> {
                     TAJ c = getTableRow().getItem();
-                    //TODO
-                    System.out.println("Adat szerkesztése");
+                    editTAJ(c);
                     refreshTable();
                 });
             }
 
             @Override
-            protected void updateItem(Void s, boolean b) {
-                super.updateItem(s, b);
-                if(b){
+            protected void updateItem(Void elem, boolean ures) {
+                super.updateItem(elem, ures);
+                if(ures){
                     setGraphic(null);
                 }
                 else{
@@ -88,11 +89,17 @@ public class MainWindowController implements Initializable {
         });
     }
 
+    private void editTAJ(TAJ c) {
+        FXMLLoader fxmlLoader = App.loadFXML("/fxml/editTAJ.fxml");
+        editTAJController controller = fxmlLoader.getController();
+        controller.setTAJ(c);
+    }
+
     private void deleteTAJ(TAJ c) {//TODO gombok cseréje yes -> igen, no -> nem
         final ButtonType igenBtn = new ButtonType("Igen");
         final ButtonType nemBtn = new ButtonType("Nem");
 
-        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Biztosan törölni szeretné ezt a személyt: "+  c.getName() + " az adatbázisból?", igenBtn, nemBtn);
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Biztosan törölni szeretné "+  c.getName() + "-t a adatbázisból?", igenBtn, nemBtn);
         confirm.showAndWait().ifPresent(buttonType -> {
             if (buttonType.equals(igenBtn)) {
                 dao.delete(c);
