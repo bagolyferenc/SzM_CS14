@@ -7,7 +7,9 @@ import hu.unideb.inf.TAJ;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class OltasDAOImplement implements OltasDAO{
 
@@ -102,5 +104,10 @@ public class OltasDAOImplement implements OltasDAO{
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void deleteAll(int tajid) {
+        findAll(tajid).forEach(this::delete);
     }
 }
