@@ -1,6 +1,7 @@
 package hu.unideb.dao;
 
 import hu.unideb.config.TajConfiguration;
+import hu.unideb.inf.Oltas;
 import hu.unideb.inf.TAJ;
 
 import javax.print.attribute.standard.MediaSize;
@@ -24,7 +25,6 @@ import java.util.Properties;
         connectionURL = TajConfiguration.getValues("db.url");
     }
 
-
     @Override
     public List<hu.unideb.inf.TAJ> findAll() {
 
@@ -36,19 +36,14 @@ import java.util.Properties;
 
         ){
             while (rs.next()){
-                hu.unideb.inf.TAJ taj = new hu.unideb.inf.TAJ();
+                TAJ taj = new TAJ();
                 taj.setId(rs.getInt("id"));
                 taj.setTajszam(rs.getString("tajszam"));
                 taj.setName(rs.getString("name"));
-
-                //TAJ.GenderType gender = TAJ.GenderType.valueOf(rs.getInt("gender"));
-                //taj.setSznap(gender == null ? TAJ.GenderType.NA : TAJ.GenderType.valueOf(gender));
-                //taj.setGender(rs.getInt("gender"));
                 taj.setVercsoport(rs.getString("vercsoport"));
                 taj.setLakcim(rs.getString("lakcim"));
                 taj.setSzhely(rs.getString("szhely"));
                 taj.setAnev(rs.getString("anev"));
-
                 Date date = Date.valueOf(rs.getString("sznap"));
                 taj.setSznap(date == null ? LocalDate.now() : date.toLocalDate());
 
@@ -63,12 +58,12 @@ import java.util.Properties;
     }
 
     @Override
-    public hu.unideb.inf.TAJ save(hu.unideb.inf.TAJ taj) {
-        try(Connection c = DriverManager.getConnection(properties.getProperty(connectionURL));
+    public TAJ save(TAJ taj) {
+        try(Connection c = DriverManager.getConnection(connectionURL);
             PreparedStatement stmt = taj.getId() <= 0 ? c.prepareStatement(INSERT_TAJ, Statement.RETURN_GENERATED_KEYS) : c.prepareStatement(UPDATE_TAJ);
         ){
             if(taj.getId() > 0) { //UPDATE
-                stmt.setInt(7, taj.getId());
+                stmt.setInt(8, taj.getId());
             }
             //tajszam=?, name=?, vercsoport=?, lakcim=?, szhely=?, anev=?, sznap=? WHERE id=?
 
