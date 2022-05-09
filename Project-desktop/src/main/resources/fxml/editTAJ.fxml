@@ -99,7 +99,7 @@
                               <Insets top="2.0" />
                            </VBox.margin>
                         </Label>
-                        <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="145.0" style="-fx-background-color: a7a886;" text="Hozzáadás" onAction="#addUjOltas">
+                        <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="145.0" style="-fx-background-color: a7a886;" text="Hozzáadás">
                            <VBox.margin>
                               <Insets left="2.0" right="4.0" top="2.0" />
                            </VBox.margin>
