@@ -15,8 +15,8 @@ import java.util.Properties;
  public class TAJDAOImplement implements TajDAO {
 
      private static final String SELECT_ALL_TAJ = "SELECT * FROM TAJ";
-     private static final String INSERT_TAJ = "INSERT INTO TAJ(tajszam, name, lakcim, szhely, anev, sznap) VALUES(?,?,?,?,?,?) ";
-     private static final String UPDATE_TAJ = "UPDATE TAJ SET tajszam=?, name=?, lakcim=?, szhely=?, anev=?, sznap=? WHERE id=?";
+     private static final String INSERT_TAJ = "INSERT INTO TAJ(tajszam, name, vercsoport, lakcim, szhely, anev, sznap) VALUES(?,?,?,?,?,?,?) ";
+     private static final String UPDATE_TAJ = "UPDATE TAJ SET tajszam=?, name=?, vercsoport=?, lakcim=?, szhely=?, anev=?, sznap=? WHERE id=?";
      private static final String DELETE_TAJ = "DELETE FROM TAJ WHERE id=?";
      public Properties properties = new Properties();
      private String connectionURL;
@@ -40,6 +40,7 @@ import java.util.Properties;
                 taj.setId(rs.getInt("id"));
                 taj.setTajszam(rs.getString("tajszam"));
                 taj.setName(rs.getString("name"));
+                taj.setVercsoport(rs.getString("vercsoport"));
                 taj.setLakcim(rs.getString("lakcim"));
                 taj.setSzhely(rs.getString("szhely"));
                 taj.setAnev(rs.getString("anev"));
@@ -62,16 +63,17 @@ import java.util.Properties;
             PreparedStatement stmt = taj.getId() <= 0 ? c.prepareStatement(INSERT_TAJ, Statement.RETURN_GENERATED_KEYS) : c.prepareStatement(UPDATE_TAJ);
         ){
             if(taj.getId() > 0) { //UPDATE
-                stmt.setInt(7, taj.getId());
+                stmt.setInt(8, taj.getId());
             }
             //tajszam=?, name=?, vercsoport=?, lakcim=?, szhely=?, anev=?, sznap=? WHERE id=?
 
             stmt.setString(1, taj.getTajszam());
             stmt.setString(2, taj.getName());
-            stmt.setString(3, taj.getLakcim());
-            stmt.setString(4, taj.getSzhely());
-            stmt.setString(5, taj.getAnev());
-            stmt.setString(6, taj.getSznap().toString());
+            stmt.setString(3, taj.getVercsoport());
+            stmt.setString(4, taj.getLakcim());
+            stmt.setString(5, taj.getSzhely());
+            stmt.setString(6, taj.getAnev());
+            stmt.setString(7, taj.getSznap().toString());
 
             int affectedRows = stmt.executeUpdate();
             if (affectedRows == 0) {
