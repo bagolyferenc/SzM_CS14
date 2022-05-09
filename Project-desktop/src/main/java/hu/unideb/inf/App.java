@@ -31,6 +31,7 @@ public class App extends Application {
     }
 
     public static FXMLLoader loadFXML(String fxml){
+
         FXMLLoader Loader = new FXMLLoader(App.class.getResource(fxml));
         Scene scene = null;
         try {
