@@ -1,6 +1,7 @@
 package hu.unideb.inf;
 
 import javafx.beans.property.*;
+import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
 
@@ -9,11 +10,24 @@ public class TAJ {
     private StringProperty tajszam = new SimpleStringProperty(this, "tajszam");
     private StringProperty name = new SimpleStringProperty(this, "name");
     //private GenderType gender;
-    private StringProperty vercsoport = new SimpleStringProperty(this, "vercsoport");
     private StringProperty lakcim = new SimpleStringProperty(this, "lakcim");
     private StringProperty szhely = new SimpleStringProperty(this, "szhely");
     private StringProperty anev = new SimpleStringProperty(this, "anev");
     private ObjectProperty<LocalDate> sznap = new SimpleObjectProperty<>(this, "sznap");
+    private ObjectProperty<ObservableList<Oltas>> oltasok = new SimpleObjectProperty<>(this, "oltasok");
+
+
+    public ObservableList<Oltas> getOltasok() {
+        return oltasok.get();
+    }
+
+    public ObjectProperty<ObservableList<Oltas>> oltasokProperty() {
+        return oltasok;
+    }
+
+    public void setOltasok(ObservableList<Oltas> oltasok) {
+        this.oltasok.set(oltasok);
+    }
 
     /*public enum GenderType{
         MALE,FEMALE,NA
@@ -53,18 +67,6 @@ public class TAJ {
 
     public void setName(String name) {
         this.name.set(name);
-    }
-
-    public String getVercsoport() {
-        return vercsoport.get();
-    }
-
-    public StringProperty vercsoportProperty() {
-        return vercsoport;
-    }
-
-    public void setVercsoport(String vercsoport) {
-        this.vercsoport.set(vercsoport);
     }
 
     public String getLakcim() {
