@@ -2,20 +2,25 @@ package hu.unideb.inf.controller;
 
 import hu.unideb.dao.TAJDAOImplement;
 import hu.unideb.dao.TajDAO;
+import hu.unideb.inf.App;
 import hu.unideb.inf.TAJ;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class MainWindowController implements Initializable {
 
-    TajDAO dao = new TAJDAOImplement();
+    private final TajDAO dao = new TAJDAOImplement();
+    private List<TAJ> persons;
 
     @FXML
     private TableView<TAJ> tajTable;
@@ -24,34 +29,22 @@ public class MainWindowController implements Initializable {
     private TableColumn<TAJ, String> nameColumn;
 
     @FXML
-    private TableColumn<TAJ, String> tajColumn;
-
-    @FXML
-    private TableColumn<TAJ, String> vercsoportColumn;
-    @FXML
-    private TableColumn<TAJ, String> lakcimColumn;
-    @FXML
-    private TableColumn<TAJ, String> szulhelyColumn;
-    @FXML
-    private TableColumn<TAJ, String> szulnapColumn;
-    @FXML
-    private TableColumn<TAJ, String> anyjaneveColumn;
-    @FXML
     private TableColumn<TAJ, Void> opciokColumn;
 
+    @FXML
+    private TextField tajKereses;
 
+    @FXML
+    public void onTajKereses(){
+        List<TAJ> szures = persons.stream().filter(taj -> taj.getTajszam().contains(tajKereses.getText())).collect(Collectors.toList());
+        tajTable.getItems().setAll(szures);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         refreshTable();
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        tajColumn.setCellValueFactory(new PropertyValueFactory<>("tajszam"));
-        vercsoportColumn.setCellValueFactory(new PropertyValueFactory<>("vercsoport"));
-        lakcimColumn.setCellValueFactory(new PropertyValueFactory<>("lakcim"));
-        szulhelyColumn.setCellValueFactory(new PropertyValueFactory<>("szhely"));
-        szulnapColumn.setCellValueFactory(new PropertyValueFactory<>("sznap"));
-        anyjaneveColumn.setCellValueFactory(new PropertyValueFactory<>("anev"));
         opciokColumn.setCellFactory(tajStringTableColumn -> new TableCell<>(){
 
             private final Button delBtn = new Button("Törlés");
@@ -66,16 +59,15 @@ public class MainWindowController implements Initializable {
 
                 editBtn.setOnAction(actionEvent -> {
                     TAJ c = getTableRow().getItem();
-                    //TODO
-                    System.out.println("Adat szerkesztése");
+                    editTAJ(c);
                     refreshTable();
                 });
             }
 
             @Override
-            protected void updateItem(Void s, boolean b) {
-                super.updateItem(s, b);
-                if(b){
+            protected void updateItem(Void elem, boolean ures) {
+                super.updateItem(elem, ures);
+                if(ures){
                     setGraphic(null);
                 }
                 else{
@@ -88,14 +80,20 @@ public class MainWindowController implements Initializable {
         });
     }
 
-    private void deleteTAJ(TAJ c) {//TODO gombok cseréje yes -> igen, no -> nem
+    private void editTAJ(TAJ t) {
+        FXMLLoader fxmlLoader = App.loadFXML("/fxml/editTAJ.fxml");
+        editTAJController controller = fxmlLoader.getController();
+        controller.setTAJ(t);
+    }
+
+    private void deleteTAJ(TAJ t) {
         final ButtonType igenBtn = new ButtonType("Igen");
         final ButtonType nemBtn = new ButtonType("Nem");
 
-        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Biztosan törölni szeretné "+  c.getName() + " az adatbázisból?", igenBtn, nemBtn);
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Biztosan törölni szeretné "+  t.getName() + "-t a(z) adatbázisból?", igenBtn, nemBtn);
         confirm.showAndWait().ifPresent(buttonType -> {
             if (buttonType.equals(igenBtn)) {
-                dao.delete(c);
+                dao.delete(t);
             }
         });
 
@@ -103,11 +101,19 @@ public class MainWindowController implements Initializable {
     }
 
     private void refreshTable() {
-        tajTable.getItems().setAll(dao.findAll());
+        persons = dao.findAll();
+        tajTable.getItems().setAll(persons);
     }
 
     @FXML
-        public void onExit(){
+    public void onExit(){
             Platform.exit();
+    }
+
+    @FXML
+    public void onAdd(){
+        FXMLLoader fxmlLoader = App.loadFXML("/fxml/editTAJ.fxml");
+        editTAJController controller = fxmlLoader.getController();
+        controller.setTAJ(new TAJ());
     }
 }

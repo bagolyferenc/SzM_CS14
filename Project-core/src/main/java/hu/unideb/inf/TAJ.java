@@ -6,15 +6,14 @@ import javafx.collections.ObservableList;
 import java.time.LocalDate;
 
 public class TAJ {
-    private IntegerProperty id = new SimpleIntegerProperty(this,"id");
-    private StringProperty tajszam = new SimpleStringProperty(this, "tajszam");
-    private StringProperty name = new SimpleStringProperty(this, "name");
-    //private GenderType gender;
-    private StringProperty lakcim = new SimpleStringProperty(this, "lakcim");
-    private StringProperty szhely = new SimpleStringProperty(this, "szhely");
-    private StringProperty anev = new SimpleStringProperty(this, "anev");
-    private ObjectProperty<LocalDate> sznap = new SimpleObjectProperty<>(this, "sznap");
-    private ObjectProperty<ObservableList<Oltas>> oltasok = new SimpleObjectProperty<>(this, "oltasok");
+    private final IntegerProperty id = new SimpleIntegerProperty(this,"id");
+    private final StringProperty tajszam = new SimpleStringProperty(this, "tajszam");
+    private  final StringProperty name = new SimpleStringProperty(this, "name");
+    private  final StringProperty lakcim = new SimpleStringProperty(this, "lakcim");
+    private final StringProperty szhely = new SimpleStringProperty(this, "szhely");
+    private final StringProperty anev = new SimpleStringProperty(this, "anev");
+    private final ObjectProperty<LocalDate> sznap = new SimpleObjectProperty<>(this, "sznap");
+    private final ObjectProperty<ObservableList<Oltas>> oltasok = new SimpleObjectProperty<>(this, "oltasok");
 
 
     public ObservableList<Oltas> getOltasok() {
@@ -29,16 +28,8 @@ public class TAJ {
         this.oltasok.set(oltasok);
     }
 
-    /*public enum GenderType{
-        MALE,FEMALE,NA
-    }*/
-
     public int getId() {
         return id.get();
-    }
-
-    public IntegerProperty idProperty() {
-        return id;
     }
 
     public void setId(int id) {
@@ -116,12 +107,4 @@ public class TAJ {
     public void setSznap(LocalDate sznap) {
         this.sznap.set(sznap);
     }
-
-    /*public GenderType getGender() {
-        return gender;
-    }
-
-    public void setGender(GenderType gender) {
-        this.gender = gender;
-    }*/
 }

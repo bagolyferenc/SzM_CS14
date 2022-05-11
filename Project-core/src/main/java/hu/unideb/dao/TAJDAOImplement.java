@@ -1,16 +1,11 @@
 package hu.unideb.dao;
 
-import hu.unideb.config.TajConfiguration;
-import hu.unideb.inf.Oltas;
-import hu.unideb.inf.TAJ;
 
-import javax.print.attribute.standard.MediaSize;
-import java.io.IOException;
+import hu.unideb.inf.TAJ;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
  public class TAJDAOImplement implements TajDAO {
 
@@ -18,11 +13,10 @@ import java.util.Properties;
      private static final String INSERT_TAJ = "INSERT INTO TAJ(tajszam, name, vercsoport, lakcim, szhely, anev, sznap) VALUES(?,?,?,?,?,?,?) ";
      private static final String UPDATE_TAJ = "UPDATE TAJ SET tajszam=?, name=?, vercsoport=?, lakcim=?, szhely=?, anev=?, sznap=? WHERE id=?";
      private static final String DELETE_TAJ = "DELETE FROM TAJ WHERE id=?";
-     public Properties properties = new Properties();
-     private String connectionURL;
+     private final String connectionURL;
 
     public TAJDAOImplement(){
-        connectionURL = TajConfiguration.getValues("db.url");
+        connectionURL = "jdbc:sqlite:E:/SzMProjectNew/Project-core/src/main/resources/taj.db";
     }
 
     @Override
@@ -60,12 +54,11 @@ import java.util.Properties;
     @Override
     public TAJ save(TAJ taj) {
         try(Connection c = DriverManager.getConnection(connectionURL);
-            PreparedStatement stmt = taj.getId() <= 0 ? c.prepareStatement(INSERT_TAJ, Statement.RETURN_GENERATED_KEYS) : c.prepareStatement(UPDATE_TAJ);
+            PreparedStatement stmt = taj.getId() <= 0 ? c.prepareStatement(INSERT_TAJ, Statement.RETURN_GENERATED_KEYS) : c.prepareStatement(UPDATE_TAJ)
         ){
             if(taj.getId() > 0) { //UPDATE
                 stmt.setInt(8, taj.getId());
             }
-            //tajszam=?, name=?, vercsoport=?, lakcim=?, szhely=?, anev=?, sznap=? WHERE id=?
 
             stmt.setString(1, taj.getTajszam());
             stmt.setString(2, taj.getName());
@@ -98,7 +91,7 @@ import java.util.Properties;
     public void delete(TAJ taj) {
 
         try (Connection c = DriverManager.getConnection(connectionURL);
-            PreparedStatement stmt = c.prepareStatement(DELETE_TAJ);
+            PreparedStatement stmt = c.prepareStatement(DELETE_TAJ)
         ){
 
             stmt.setInt(1,taj.getId());

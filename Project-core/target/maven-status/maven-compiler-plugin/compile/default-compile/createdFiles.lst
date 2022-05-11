@@ -3,5 +3,4 @@ hu\unideb\inf\TAJ.class
 hu\unideb\dao\TajDAO.class
 hu\unideb\dao\OltasDAOImplement.class
 hu\unideb\dao\TAJDAOImplement.class
-hu\unideb\config\TajConfiguration.class
 hu\unideb\dao\OltasDAO.class
