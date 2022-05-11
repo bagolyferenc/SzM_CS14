@@ -25,11 +25,6 @@
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-container-default</artifactId>
-            <version>1.0-alpha-9-stable-1</version>
-        </dependency>
     </dependencies>
     <build>
         <plugins>

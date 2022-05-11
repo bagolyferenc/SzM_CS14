@@ -1,13 +1,9 @@
 package hu.unideb.inf;
 
-import hu.unideb.dao.TAJDAOImplement;
-import hu.unideb.dao.TajDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -31,6 +27,7 @@ public class App extends Application {
     }
 
     public static FXMLLoader loadFXML(String fxml){
+
         FXMLLoader Loader = new FXMLLoader(App.class.getResource(fxml));
         Scene scene = null;
         try {
