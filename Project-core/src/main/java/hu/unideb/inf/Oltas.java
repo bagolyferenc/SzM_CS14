@@ -5,29 +5,14 @@ import javafx.beans.property.*;
 import java.time.LocalDate;
 
 public class Oltas {
-    private final StringProperty value = new SimpleStringProperty(this,"value");
 
-    public String getValue(){
-        return value.get();
-    }
-
-    public StringProperty valueProperty(){
-        return value;
-    }
-
-
-    private IntegerProperty id = new SimpleIntegerProperty("this", "id");
-    private StringProperty oltas_neve = new SimpleStringProperty("this", "oltas_neve");
-    private StringProperty orvos_neve = new SimpleStringProperty("this", "orvos_neve");
-    private ObjectProperty<LocalDate> oltas_idopontja = new SimpleObjectProperty<>(this, "oltas_idopontja");
-    private IntegerProperty tajId = new SimpleIntegerProperty(this, "taj_id");
+    private final IntegerProperty id = new SimpleIntegerProperty("this", "id");
+    private final StringProperty oltas_neve = new SimpleStringProperty("this", "oltas_neve");
+    private final StringProperty orvos_neve = new SimpleStringProperty("this", "orvos_neve");
+    private final ObjectProperty<LocalDate> oltas_idopontja = new SimpleObjectProperty<>(this, "oltas_idopontja");
 
     public int getId() {
         return id.get();
-    }
-
-    public IntegerProperty idProperty() {
-        return id;
     }
 
     public void setId(int id) {

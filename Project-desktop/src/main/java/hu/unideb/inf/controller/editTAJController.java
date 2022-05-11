@@ -7,22 +7,32 @@ import hu.unideb.dao.TajDAO;
 import hu.unideb.inf.App;
 import hu.unideb.inf.Oltas;
 import hu.unideb.inf.TAJ;
+import javafx.beans.binding.StringBinding;
+import javafx.beans.binding.When;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 
-public class editTAJController {
+public class editTAJController implements Initializable {
 
     private TAJ taj;
-    //private Oltas oltas;
-    private OltasDAO oltasDAO = new OltasDAOImplement();
-    private TajDAO tajDAO = new TAJDAOImplement();
+    private final OltasDAO oltasDAO = new OltasDAOImplement();
+    private final TajDAO tajDAO = new TAJDAOImplement();
 
+    @FXML
+    private Button mentesBtn;
 
     @FXML
     private TextField name;
@@ -44,6 +54,10 @@ public class editTAJController {
 
     @FXML
     ListView<Oltas> oltasok;
+
+    @FXML
+    private Label tajHiba;
+
 
     public void setTAJ(TAJ t) {
         this.taj = t;
@@ -69,7 +83,80 @@ public class editTAJController {
     public void onSave(){
         taj = tajDAO.save(taj);
         oltasDAO.deleteAll(taj.getId());
-        taj.getOltasok().forEach(oltas -> oltasDAO.save(oltas,taj.getId()));
+        taj.getOltasok().forEach(oltas -> {
+            oltas.setId(0);
+            oltasDAO.save(oltas,taj.getId());
+        });
         App.loadFXML("/fxml/main_window.fxml");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        mentesBtn.disableProperty().bind(name.textProperty().isEmpty().or(szul_hely.textProperty().isEmpty()).or(anya_neve.textProperty().isEmpty()).or(lakcim.textProperty().isEmpty()).or(tajsz.textProperty().isEmpty()).or(szuli.valueProperty().isNull()).or(oltasok.itemsProperty().isNull()));
+
+        tajsz.textProperty().addListener((observable, oV, nV) -> {
+            if (nV != null && !nV.matches("[0-9]{3}[ ]?[0-9]{3}[ ][0-9]{3}")){
+                tajHiba.setText("*");
+            }else{
+                tajHiba.setText("");
+            }
+        });
+
+        oltasok.setCellFactory(param -> {
+            ListCell<Oltas> cell = new ListCell<>();
+            ContextMenu contextMenu = new ContextMenu();
+
+            MenuItem editItem = new MenuItem("Szerkeztés");
+            MenuItem deleteItem = new MenuItem("Törlés");
+
+            contextMenu.getItems().addAll(editItem, deleteItem);
+
+            editItem.setOnAction(event -> {
+                Oltas item = cell.getItem();
+                showOltasAblak(item);
+            });
+
+            deleteItem.setOnAction(event -> {
+                taj.getOltasok().remove(cell.getItem());
+            });
+
+            StringBinding cellTextBinding = new When(cell.itemProperty().isNotNull()).then(cell.itemProperty().asString()).otherwise("");
+            cell.textProperty().bind(cellTextBinding);
+
+            cell.emptyProperty().addListener(((observableValue, aBoolean, t1) -> {
+                if (t1){
+                    cell.setContextMenu(null);
+                }else{
+                    cell.setContextMenu(contextMenu);
+                }
+            }));
+            return cell;
+        });
+    }
+
+    @FXML
+    public void addUjOltas(){
+        showOltasAblak();
+    }
+
+    private void showOltasAblak(Oltas oltas) {
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addOltas.fxml"));
+
+        try {
+            Parent root = loader.load();
+            addOltasController controller = loader.getController();
+            controller.init(oltas, taj, stage);
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showOltasAblak(){
+        showOltasAblak(new Oltas());
     }
 }

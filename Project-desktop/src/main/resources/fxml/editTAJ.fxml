@@ -7,6 +7,8 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -19,6 +21,11 @@
    <items>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: cccd9a;">
          <children>
+            <ImageView fitHeight="400.0" fitWidth="298.0" opacity="0.31">
+               <image>
+                  <Image url="@alap1.jpg" />
+               </image>
+            </ImageView>
             <VBox layoutX="3.0" layoutY="44.0" prefHeight="350.0" prefWidth="294.0" style="-fx-border-color: black; -fx-border-radius: 5;">
                <children>
                   <Label prefHeight="50.0" prefWidth="293.0" text="Az oltási könyv a 14 évesnél idősebb személyek védőoltásainak igazolásaira szolgál." textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" wrapText="true" />
@@ -40,12 +47,12 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="142.0" style="-fx-background-color: a7a886;" text="Mentés" onAction="#onSave">
+                              <Button fx:id="mentesBtn" mnemonicParsing="false" onAction="#onSave" prefHeight="24.0" prefWidth="142.0" style="-fx-background-color: a7a886;" text="Mentés">
                                  <GridPane.margin>
                                     <Insets bottom="2.0" />
                                  </GridPane.margin>
                               </Button>
-                              <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="145.0" style="-fx-background-color: a7a886;" text="Mégse" GridPane.columnIndex="1" onAction="#onCancel">
+                              <Button mnemonicParsing="false" onAction="#onCancel" prefHeight="24.0" prefWidth="145.0" style="-fx-background-color: a7a886;" text="Mégse" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets bottom="2.0" />
                                  </GridPane.margin>
@@ -71,6 +78,11 @@
          </children></AnchorPane>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: cccd9a;">
          <children>
+            <ImageView fitHeight="400.0" fitWidth="298.0" opacity="0.31">
+               <image>
+                  <Image url="@alap1.jpg" />
+               </image>
+            </ImageView>
             <GridPane layoutX="2.0" layoutY="45.0" prefHeight="350.0" prefWidth="288.0" style="-fx-border-radius: 5; -fx-border-color: black;">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.39996337890625" minWidth="10.0" prefWidth="143.0" />
@@ -99,20 +111,25 @@
                               <Insets top="2.0" />
                            </VBox.margin>
                         </Label>
-                        <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="145.0" style="-fx-background-color: a7a886;" text="Hozzáadás">
+                        <Button mnemonicParsing="false" onAction="#addUjOltas" prefHeight="24.0" prefWidth="145.0" style="-fx-background-color: a7a886;" text="Hozzáadás">
                            <VBox.margin>
                               <Insets left="2.0" right="4.0" top="2.0" />
                            </VBox.margin>
                         </Button>
                      </children>
                   </VBox>
-                  <TextField fx:id="name" alignment="CENTER" prefHeight="42.0" prefWidth="157.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-color: cccd9a;" GridPane.columnIndex="1" />
-                  <TextField fx:id="lakcim" alignment="CENTER" prefHeight="42.0" prefWidth="157.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-color: cccd9a;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField fx:id="tajsz" alignment="CENTER" prefHeight="42.0" prefWidth="157.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-color: cccd9a;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <ListView fx:id="oltasok" prefHeight="50.0" prefWidth="140.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-color: cccd9a;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <DatePicker fx:id="szuli" prefHeight="42.0" prefWidth="157.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-control-inner-background: cccd9a;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="szul_hely" alignment="CENTER" prefHeight="42.0" prefWidth="157.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-color: cccd9a;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="anya_neve" alignment="CENTER" prefHeight="42.0" prefWidth="157.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-color: cccd9a;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="name" alignment="CENTER" opacity="0.75" prefHeight="42.0" prefWidth="157.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-color: cccd9a;" GridPane.columnIndex="1" />
+                  <TextField fx:id="lakcim" opacity="0.75" prefHeight="42.0" prefWidth="157.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-color: cccd9a;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="tajsz" alignment="CENTER" opacity="0.75" prefHeight="42.0" prefWidth="157.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-color: cccd9a;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <ListView fx:id="oltasok" opacity="0.75" prefHeight="50.0" prefWidth="140.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-color: cccd9a;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <DatePicker fx:id="szuli" opacity="0.75" prefHeight="42.0" prefWidth="157.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-control-inner-background: cccd9a;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="szul_hely" alignment="CENTER" opacity="0.75" prefHeight="42.0" prefWidth="157.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-color: cccd9a;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="anya_neve" alignment="CENTER" opacity="0.75" prefHeight="42.0" prefWidth="157.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-color: cccd9a;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="tajHiba" textFill="#841414" GridPane.rowIndex="5">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin>
+                  </Label>
                </children>
                <padding>
                   <Insets bottom="1.0" left="1.0" right="1.0" />

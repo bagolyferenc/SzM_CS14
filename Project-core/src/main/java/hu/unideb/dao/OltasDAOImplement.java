@@ -1,15 +1,11 @@
 package hu.unideb.dao;
 
-import hu.unideb.config.TajConfiguration;
 import hu.unideb.inf.Oltas;
 import hu.unideb.inf.TAJ;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class OltasDAOImplement implements OltasDAO{
 
@@ -17,10 +13,12 @@ public class OltasDAOImplement implements OltasDAO{
     private static final String INSERT_OLTAS = "INSERT INTO OLTAS(oltas_neve, orvos_neve, oltas_idopontja) VALUES (?,?,?)";
     private static final String UPDATE_OLTAS = "UPDATE OLTAS SET oltas_neve = ?, orvos_neve = ?, oltas_idopontja = ?, WHERE id = ?";
     private static final String DELETE_OLTAS = "DELETE FROM OLTAS WHERE id = ?";
-    private String connectionURL;
+    private final String connectionURL;
+
+
 
     public OltasDAOImplement() {
-        this.connectionURL = TajConfiguration.getValues("db.url");
+        this.connectionURL = "jdbc:sqlite:E:/SzMProjectNew/Project-core/src/main/resources/taj.db";
     }
 
     @Override
@@ -59,7 +57,7 @@ public class OltasDAOImplement implements OltasDAO{
     @Override
     public Oltas save(Oltas oltas, int tajId) {
         try(Connection c = DriverManager.getConnection(connectionURL);
-            PreparedStatement stmt = oltas.getId() <= 0 ? c.prepareStatement(INSERT_OLTAS, Statement.RETURN_GENERATED_KEYS) : c.prepareStatement(UPDATE_OLTAS);
+            PreparedStatement stmt = oltas.getId() <= 0 ? c.prepareStatement(INSERT_OLTAS, Statement.RETURN_GENERATED_KEYS) : c.prepareStatement(UPDATE_OLTAS)
         ){
 
             if(oltas.getId() > 0) { //UPDATE
@@ -95,7 +93,7 @@ public class OltasDAOImplement implements OltasDAO{
     @Override
     public void delete(Oltas o) {
         try (Connection c = DriverManager.getConnection(connectionURL);
-             PreparedStatement stmt = c.prepareStatement(DELETE_OLTAS );
+             PreparedStatement stmt = c.prepareStatement(DELETE_OLTAS )
         ){
 
             stmt.setInt(1, o.getId());

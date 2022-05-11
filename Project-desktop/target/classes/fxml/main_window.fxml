@@ -3,70 +3,82 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.controller.MainWindowController">
-    <top>
-        <MenuBar BorderPane.alignment="CENTER">
-            <menus>
-                <Menu mnemonicParsing="false" text="File">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Close" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Személy hozzáadás" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
-    </top>
-    <center>
-        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+<SplitPane dividerPositions="0.4999999999999999" maxHeight="400.0" maxWidth="600.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.controller.MainWindowController">
+    <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: cccd9a;">
             <children>
-                <Label text="Hatósági adatok">
+                <ImageView fitHeight="400.0" fitWidth="390.0" opacity="0.31">
+                    <image>
+                        <Image url="@seamless.jpg" />
+                    </image>
+                </ImageView>
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="42.0" opacity="0.85" prefHeight="122.0" prefWidth="218.0" style="-fx-border-color: black; -fx-border-radius: 10;" text="Oltási könyv 14 év feletti személy részére!" textAlignment="CENTER" wrapText="true">
                     <font>
-                        <Font size="24.0" />
+                        <Font name="System Bold" size="22.0" />
                     </font>
-                    <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                    </VBox.margin>
                 </Label>
-                <TableView fx:id="tajTable" prefHeight="349.0" prefWidth="475.0">
-                    <columns>
-                        <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Név" />
-                        <TableColumn fx:id="tajColumn" prefWidth="75.0" text="TAJ" />
-                        <TableColumn fx:id="vercsoportColumn" prefWidth="75.0" text="Vércsoport" />
-                        <TableColumn fx:id="lakcimColumn" prefWidth="75.0" text="Lakcím" />
-                        <TableColumn fx:id="szulhelyColumn" prefWidth="75.0" text="Szül.hely" />
-                        <TableColumn fx:id="szulnapColumn" prefWidth="75.0" text="Szül.nap" />
-                        <TableColumn fx:id="anyjaneveColumn" prefWidth="75.0" text="Anyja neve" />
-                        <TableColumn fx:id="opciokColumn" prefWidth="75.0" text="Opciók" />
-                    </columns>
-                    <VBox.margin>
-                        <Insets bottom="10.0" right="10.0" />
-                    </VBox.margin>
-                </TableView>
-            </children>
-        </VBox>
-    </center>
-    <left>
-        <VBox prefHeight="375.0" prefWidth="125.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" onAction="#onExit" text="Bezárás" />
-         </children></VBox>
-    </left>
-</BorderPane>
+                <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="48.0" layoutY="184.0" opacity="0.5">
+                    <image>
+                        <Image url="@260783.png" />
+                    </image>
+                </ImageView>
+            </children></AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: cccd9a;">
+            <children>
+                <ImageView fitHeight="398.0" fitWidth="376.0" layoutX="-79.0" opacity="0.31">
+                    <image>
+                        <Image url="@seamless.jpg" />
+                    </image>
+                </ImageView>
+                <Button layoutX="255.0" layoutY="14.0" mnemonicParsing="false" onAction="#onExit" prefHeight="26.0" prefWidth="27.0" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-background-color: a7a886; -fx-border-color: black;" text="X" />
+                <HBox layoutX="31.0" layoutY="71.0" opacity="0.9" prefHeight="28.0" prefWidth="232.0" style="-fx-border-color: black; -fx-background-color: cccd9a; -fx-border-radius: 10; -fx-background-radius: 10;">
+                    <children>
+                        <Label prefHeight="27.0" prefWidth="84.0" text="TAJ szám:">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="2.0" />
+                            </HBox.margin>
+                        </Label>
+                        <TextField fx:id="tajKereses" onKeyReleased="#onTajKereses" prefHeight="25.0" prefWidth="146.0" style="-fx-background-radius: 10; -fx-background-color: a7a890;">
+                            <HBox.margin>
+                                <Insets bottom="0.5" left="0.5" right="0.5" top="0.5" />
+                            </HBox.margin>
+                        </TextField>
+                    </children>
+                </HBox>
+                <Button layoutX="74.0" layoutY="358.0" mnemonicParsing="false" onAction="#onAdd" prefHeight="24.0" prefWidth="145.0" style="-fx-background-color: a7a886; -fx-border-radius: 5; -fx-border-color: black;" text="Hozzáadás" />
+                <VBox alignment="BOTTOM_CENTER" layoutX="31.0" layoutY="115.0" minWidth="228.0" prefHeight="232.0" prefWidth="230.0" style="-fx-background-color: a7a890; -fx-border-radius: 10; -fx-border-color: black;">
+                    <children>
+                        <TableView fx:id="tajTable" maxWidth="227.0" minWidth="223.0" opacity="0.9" prefHeight="220.0" prefWidth="223.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: a7a890;">
+                            <columns>
+                                <TableColumn fx:id="nameColumn" prefWidth="92.79999465942456" style="-fx-background-color: a7a890;" text="Név" />
+                                <TableColumn fx:id="opciokColumn" prefWidth="141.6000213623047" style="-fx-background-color: a7a890;" text="Opciók" />
+                            </columns>
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                            <padding>
+                                <Insets right="2.0" />
+                            </padding>
+                            <VBox.margin>
+                                <Insets bottom="3.0" left="2.0" right="2.0" />
+                            </VBox.margin>
+                        </TableView>
+                    </children>
+                </VBox>
+            </children></AnchorPane>
+    </items>
+</SplitPane>
