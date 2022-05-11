@@ -29,8 +29,6 @@ public class MainWindowController implements Initializable {
     private TableColumn<TAJ, String> tajColumn;
 
     @FXML
-    private TableColumn<TAJ, String> vercsoportColumn;
-    @FXML
     private TableColumn<TAJ, String> lakcimColumn;
     @FXML
     private TableColumn<TAJ, String> szulhelyColumn;
@@ -49,7 +47,6 @@ public class MainWindowController implements Initializable {
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         tajColumn.setCellValueFactory(new PropertyValueFactory<>("tajszam"));
-        vercsoportColumn.setCellValueFactory(new PropertyValueFactory<>("vercsoport"));
         lakcimColumn.setCellValueFactory(new PropertyValueFactory<>("lakcim"));
         szulhelyColumn.setCellValueFactory(new PropertyValueFactory<>("szhely"));
         szulnapColumn.setCellValueFactory(new PropertyValueFactory<>("sznap"));

@@ -12,5 +12,5 @@ public interface OltasDAO {
     void delete(Oltas o);
 
 
-
+    void deleteAll(int tajid);
 }

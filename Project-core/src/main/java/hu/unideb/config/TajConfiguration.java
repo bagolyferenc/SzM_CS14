@@ -23,4 +23,5 @@ public class TajConfiguration {
         public static String getValues(String key){
             return properties.getProperty(key);
         }
+
 }

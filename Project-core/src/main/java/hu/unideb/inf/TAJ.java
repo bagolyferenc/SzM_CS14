@@ -10,7 +10,6 @@ public class TAJ {
     private StringProperty tajszam = new SimpleStringProperty(this, "tajszam");
     private StringProperty name = new SimpleStringProperty(this, "name");
     //private GenderType gender;
-    private StringProperty vercsoport = new SimpleStringProperty(this, "vercsoport");
     private StringProperty lakcim = new SimpleStringProperty(this, "lakcim");
     private StringProperty szhely = new SimpleStringProperty(this, "szhely");
     private StringProperty anev = new SimpleStringProperty(this, "anev");
@@ -68,18 +67,6 @@ public class TAJ {
 
     public void setName(String name) {
         this.name.set(name);
-    }
-
-    public String getVercsoport() {
-        return vercsoport.get();
-    }
-
-    public StringProperty vercsoportProperty() {
-        return vercsoport;
-    }
-
-    public void setVercsoport(String vercsoport) {
-        this.vercsoport.set(vercsoport);
     }
 
     public String getLakcim() {

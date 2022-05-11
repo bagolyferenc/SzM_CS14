@@ -9,4 +9,5 @@ public interface TajDAO {
     hu.unideb.inf.TAJ save(hu.unideb.inf.TAJ taj);
 
     void delete(hu.unideb.inf.TAJ taj);
+
 }
